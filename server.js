@@ -10,6 +10,7 @@ let items = [
   { id: 1, name: 'Item 1', description: 'First item' },
   { id: 2, name: 'Item 2', description: 'Second item' }
 ];
+let nextId = 3; // ID counter for efficient ID generation
 
 // Health check endpoint
 app.get('/health', (req, res) => {
@@ -42,7 +43,7 @@ app.post('/api/items', (req, res) => {
   }
   
   const newItem = {
-    id: items.length > 0 ? Math.max(...items.map(i => i.id)) + 1 : 1,
+    id: nextId++,
     name,
     description: description || ''
   };
@@ -59,6 +60,11 @@ app.put('/api/items/:id', (req, res) => {
   
   if (itemIndex === -1) {
     return res.status(404).json({ error: 'Item not found' });
+  }
+  
+  // Validate that at least one field is provided for update
+  if (name === undefined && description === undefined) {
+    return res.status(400).json({ error: 'At least one field (name or description) must be provided' });
   }
   
   if (name !== undefined) items[itemIndex].name = name;
