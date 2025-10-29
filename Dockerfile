@@ -5,17 +5,18 @@ WORKDIR /tmp
 
 USER root
 # copy packge.json to the workdir
-COPY src/package*.json ./
+COPY Application/src/package*.json ./
 
 
 # install npm dependencies
 RUN npm install && npm audit fix --force
 
 # Copy application file to the 
-COPY src .
+COPY Application/src .
 
 # create local env varibel for the PORT
-ENV PORT 8080
+# use key=value format to avoid legacy warning
+ENV PORT=8080
 
 USER 1001
 
