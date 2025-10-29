@@ -1,5 +1,5 @@
 {
-  "name": "openshift-lab",
+  "name": "hello-world",
   "version": "1.0.0",
   "description": "Basic REST API server with Node.js and Express",
   "main": "server.js",
@@ -12,6 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "router": "^2.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "application for workshop"
   }
 }
